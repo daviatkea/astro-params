@@ -1,0 +1,50 @@
+---
+export const prerender = false;
+
+const { slug } = Astro.params;
+
+const pages = await fetch(
+  "https://kea-alt-del.dk/t7/api/products?limit=40000"
+).then((res) => res.json());
+
+// const pages = [
+//   {
+//     slug: "products",
+//   },
+//   {
+//     slug: "products/astro-handbook",
+//   },
+// ];
+
+const page = pages.find((page) => page.id.toString() === slug);
+if (!page) return Astro.redirect("/404");
+const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+---
+
+<h1>{capitalize(slug)}</h1>
+
+<!-- {
+  notSoldOut.map((brand) => {
+    function isSoldOut() {
+      if (brand.soldout === 1) {
+        return <p>Udsolgt</p>;
+      }
+    }
+    return (
+      <div>
+        <h3>{brand.productdisplayname}</h3>
+        <p>{brand.price},-</p>
+        <img
+          src={`https://kea-alt-del.dk/t7/images/webp/640/${brand.id}.webp`}
+          alt=""
+        />
+        {isSoldOut()}
+      </div>
+    );
+  })
+} -->
+
+<h2>{page.productdisplayname}</h2>
+<p>Nu kun {page.price},-</p>
+<img src={`https://kea-alt-del.dk/t7/images/webp/640/${page.id}.webp`} alt="" />
+{!!page.soldout && <p>Udsolgt</p>}

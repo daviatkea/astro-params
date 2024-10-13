@@ -1,0 +1,30 @@
+---
+export async function getStaticPaths() {
+  const pages = await fetch(
+    "https://kea-alt-del.dk/t7/api/products?limit=40000"
+  ).then((res) => res.json());
+
+  return pages.map((page) => ({
+    params: { slug: page.id },
+    props: { page },
+  }));
+}
+
+interface Props {
+  page: {
+    productdisplayname: string;
+    price: number;
+    id: number;
+    soldout: number;
+  };
+}
+
+const { slug } = Astro.params;
+const { page } = Astro.props;
+---
+
+<h1>{slug}</h1>
+<h2>{page.productdisplayname}</h2>
+<p>Nu kun {page.price},-</p>
+<img src={`https://kea-alt-del.dk/t7/images/webp/640/${page.id}.webp`} alt="" />
+{!!page.soldout && <p>Udsolgt</p>}
