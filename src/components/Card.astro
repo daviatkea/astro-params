@@ -5,6 +5,6 @@ const { productdisplayname, price, id, soldout } = Astro.props;
 <article>
   <h2>{productdisplayname}</h2>
   <p>Nu kun {price},-</p>
-  <!-- <img src={`https://kea-alt-del.dk/t7/images/webp/640/${id}.webp`} alt="" /> -->
+  <img src={`https://kea-alt-del.dk/t7/images/webp/640/${id}.webp`} alt="" />
   {!!soldout && <p>Udsolgt</p>}
 </article>
