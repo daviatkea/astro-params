@@ -1,0 +1,17 @@
+---
+import List from "../../components/List.astro";
+
+export const prerender = false;
+
+const pages = await fetch(
+  "https://kea-alt-del.dk/t7/api/products?limit=100"
+).then((res) => res.json());
+---
+
+<h1>Products</h1>
+
+<List {pages} subpage="dynamic" server:defer>
+  <div slot="fallback">
+    <p>Loading products...</p>
+  </div>
+</List>

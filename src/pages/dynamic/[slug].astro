@@ -26,6 +26,12 @@ const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 <h1>{capitalize(slug)}</h1>
 <p>Hurtig?</p>
 
+<Card {...page} server:defer>
+  <div slot="fallback">
+    <p>Loading...</p>
+  </div>
+</Card>
+
 <!-- {
   notSoldOut.map((brand) => {
     function isSoldOut() {
@@ -46,9 +52,3 @@ const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
     );
   })
 } -->
-
-<Card {...page} server:defer>
-  <div slot="fallback">
-    <p>Loading...</p>
-  </div>
-</Card>

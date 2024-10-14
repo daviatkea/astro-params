@@ -1,0 +1,13 @@
+---
+const { pages, subpage } = Astro.props;
+---
+
+<ul>
+  {
+    pages.map((item) => (
+      <li>
+        <a href={`/${subpage}/${item.id}`}>{item.productdisplayname}</a>
+      </li>
+    ))
+  }
+</ul>
