@@ -8,8 +8,4 @@ const pages = await fetch(
 
 <h1>Products (static)</h1>
 
-<List {pages} subpage="static" server:defer>
-  <div slot="fallback">
-    <p>Loading products...</p>
-  </div>
-</List>
+<List {pages} subpage="static" />

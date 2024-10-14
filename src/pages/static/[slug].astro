@@ -28,8 +28,4 @@ const { page } = Astro.props;
 <h1>{slug}</h1>
 <p>Hurtig?</p>
 
-<Card {...page} server:defer>
-  <div slot="fallback">
-    <p>Loading...</p>
-  </div>
-</Card>
+<Card {...page} />
