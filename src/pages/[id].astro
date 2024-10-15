@@ -1,0 +1,12 @@
+---
+const { id } = Astro.params;
+
+const sanitizedId = id.replace(/%20| /g, "-");
+if (sanitizedId !== id) {
+  return Astro.redirect(`/${sanitizedId}`);
+}
+
+export const prerender = false;
+---
+
+<h1>Du skrev {id}</h1>
