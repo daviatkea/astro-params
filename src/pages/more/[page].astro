@@ -48,6 +48,8 @@ interface Page {
 }
 
 const { page } = Astro.props as { page: Page };
+
+console.log(page);
 ---
 
 <!--Display the current page number. Astro.params.page can also be used!-->
@@ -56,6 +58,7 @@ const { page } = Astro.props as { page: Page };
   {page.data.map(({ astronaut }) => <li>{astronaut}</li>)}
 </ul>
 {page.url.first ? <a href={page.url.first}>First</a> : null}
-{page.url.prev ? <a href={page.url.prev}>Previous</a> : null}
-{page.url.next ? <a href={page.url.next}>Next</a> : null}
+{page.url.prev ? <a href={page.url.prev}>{page.currentPage - 1}</a> : null}
+{page.currentPage}
+{page.url.next ? <a href={page.url.next}>{page.currentPage + 1}</a> : null}
 {page.url.last ? <a href={page.url.last}>Last</a> : null}
