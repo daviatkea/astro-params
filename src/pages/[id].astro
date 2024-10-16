@@ -1,4 +1,6 @@
 ---
+import { Code } from "astro/components";
+
 const { id } = Astro.params;
 
 const sanitizedId = id.replace(/%20| /g, "-");
@@ -9,6 +11,17 @@ if (sanitizedId !== id) {
 export const prerender = false;
 
 const isAstro = id === "astro";
+
+const codeExample = `---
+const { param } = Astro.params;
+---
+<h1>[param] er {param}</h1>; // "[param] er ${id}"
+`;
+
+const paramExample = `├── src/
+    └── pages/
+        └── [param].astro
+`;
 ---
 
 <html lang="da">
@@ -20,12 +33,44 @@ const isAstro = id === "astro";
     <title>Astro</title>
   </head>
   <body class:list={[{ astro: isAstro }]}>
-    <h1>Du skrev <span>{id}</span></h1>
+    <h1>[param] er <span>{id}</span></h1>
+    <div>
+      <figure>
+        <Code code={paramExample} theme="houston" />
+        <figcaption>Mappestruktur</figcaption>
+      </figure>
+      <figure>
+        <Code code={codeExample} lang="js" theme="houston" />
+        <figcaption>Læs værdien af param</figcaption>
+      </figure>
+    </div>
     {id === "astro" && <p>Render markup conditionally</p>}
   </body>
 </html>
 
 <style>
+  div {
+    display: flex;
+    gap: 1rem;
+    flex-flow: wrap;
+  }
+  pre {
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    width: fit-content;
+    margin: 0.25rem 0;
+    box-shadow: inset 0 0 0 1px oklch(from #5000ca 75% c h);
+  }
+  figure {
+    margin: 0;
+
+    figcaption {
+      color: #555;
+      font-weight: 500;
+      letter-spacing: -0.2px;
+    }
+  }
   html {
     font-family: system-ui;
     -webkit-font-smoothing: antialiased;
@@ -34,6 +79,10 @@ const isAstro = id === "astro";
   .astro {
     background: oklch(from #5000ca 25% 36% h);
     color: #fff;
+
+    figcaption {
+      color: oklch(from #fff 85% c h);
+    }
   }
   span {
     color: #5000ca;
