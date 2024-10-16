@@ -1,0 +1,151 @@
+---
+export const prerender = false;
+---
+
+<div class="browser">
+  <form class="group">
+    <span>my-astro-site.com/</span>
+    <input
+      id="input"
+      type="text"
+      value=""
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <button hidden>Submit</button>
+  </form>
+  <div class="output">
+    <div id="iframe-url-display"></div>
+    <p id="loading" style="display:none;">Loading...</p>
+    <iframe
+      id="if"
+      src="https://imaginative-vacherin-24d0fa.netlify.app/"
+      frameborder="0"></iframe>
+  </div>
+</div>
+
+<style>
+  .browser {
+    font-family: system-ui;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    border-radius: 10px;
+    border: 1px solid oklch(94% 3% 270);
+    overflow: clip;
+
+    &::before {
+      content: "";
+      height: 2rem;
+      background: radial-gradient(
+          circle at 1.5rem 50%,
+          #ff5f56 0.35rem,
+          #0000 0.38rem
+        ),
+        radial-gradient(circle at 2.5rem 50%, #ffbd2e 0.35rem, #0000 0.38rem),
+        radial-gradient(circle at 3.5rem 50%, #27c93f 0.35rem, #0000 0.38rem);
+      grid-row: 1;
+      grid-column: 1 / -1;
+    }
+
+    &::after {
+      content: "";
+      grid-column: 1 / -1;
+      grid-row: 1 / span 2;
+      background: #fefefe;
+      border-bottom: 1px solid oklch(94% 3% 270);
+      z-index: -1;
+    }
+  }
+
+  #loading {
+    background: #fff;
+    z-index: 1;
+    margin: 0;
+    padding: 1rem;
+  }
+
+  .output {
+    background: #fff;
+    grid-column: 1 / -1;
+    grid-row: 3;
+    display: grid;
+    > * {
+      grid-area: 1 / 1;
+    }
+  }
+
+  .group {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: grid;
+    margin: 0 0.5rem 0.5rem;
+    grid-template-columns: auto 1fr;
+    align-items: baseline;
+    padding: 0.35rem 1rem;
+    border-radius: 99px;
+    background: oklch(94% 3% 270);
+    span {
+      z-index: 1;
+      pointer-events: none;
+      color: oklch(60% none none);
+    }
+  }
+
+  input {
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    padding: 0;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    height: 100%;
+  }
+
+  body {
+    min-height: 100%;
+    display: grid;
+    padding: 1rem;
+    margin: 0;
+    background: #f5f3fb;
+  }
+</style>
+
+<script>
+  const form = document.querySelector("form");
+  const iframe = document.querySelector("#if");
+  const input = document.querySelector("#input");
+  const loadingMessage = document.querySelector("#loading");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const inputValue = input.value.trim();
+
+    if (inputValue) {
+      loadingMessage.style.display = "block";
+
+      iframe.src = `https://imaginative-vacherin-24d0fa.netlify.app/${inputValue}`;
+    }
+  });
+
+  iframe.addEventListener("load", () => {
+    loadingMessage.style.display = "none";
+  });
+
+  window.addEventListener("message", (event) => {
+    console.log("Iframe navigated to:", event.data);
+    document.querySelector("#iframe-url-display").textContent = event.data;
+  });
+</script>
