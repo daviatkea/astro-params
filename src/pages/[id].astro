@@ -7,6 +7,29 @@ if (sanitizedId !== id) {
 }
 
 export const prerender = false;
+
+const isAstro = id === "astro";
 ---
 
-<h1>Du skrev {id}</h1>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body class:list={[{ astro: isAstro }]}>
+    <h1>Du skrev {id}</h1>
+    {id === "astro" && <p>Render markup conditionally</p>}
+  </body>
+</html>
+
+<style>
+  html {
+    font-family: system-ui;
+  }
+  .astro {
+    background: rgb(170, 230, 170);
+  }
+</style>
