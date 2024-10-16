@@ -145,7 +145,9 @@ export const prerender = false;
   });
 
   window.addEventListener("message", (event) => {
-    console.log("Iframe navigated to:", event.data);
-    document.querySelector("#iframe-url-display").textContent = event.data;
+    if (event.origin === "https://imaginative-vacherin-24d0fa.netlify.app") {
+      console.log("Iframe navigated to:", event.data);
+      document.querySelector("#iframe-url-display").textContent = event.data;
+    }
   });
 </script>
