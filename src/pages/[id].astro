@@ -20,7 +20,7 @@ const isAstro = id === "astro";
     <title>Astro</title>
   </head>
   <body class:list={[{ astro: isAstro }]}>
-    <h1>Du skrev "{id}"</h1>
+    <h1>Du skrev <span>{id}</span></h1>
     {id === "astro" && <p>Render markup conditionally</p>}
   </body>
 </html>
@@ -28,8 +28,20 @@ const isAstro = id === "astro";
 <style>
   html {
     font-family: system-ui;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   .astro {
-    background: rgb(170, 230, 170);
+    background: oklch(from #5000ca 25% 36% h);
+    color: #fff;
+  }
+  span {
+    color: #5000ca;
+    border: 1px solid oklch(from #5000ca 75% c h);
+    background: oklch(from #5000ca 98% c h / 50%);
+    line-height: 1;
+    padding: 0.2rem;
+    display: inline-block;
+    border-radius: 0.25rem;
   }
 </style>
