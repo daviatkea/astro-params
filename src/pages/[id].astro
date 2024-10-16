@@ -20,7 +20,7 @@ const isAstro = id === "astro";
     <title>Astro</title>
   </head>
   <body class:list={[{ astro: isAstro }]}>
-    <h1>Du skrev {id}</h1>
+    <h1>Du skrev "{id}"</h1>
     {id === "astro" && <p>Render markup conditionally</p>}
   </body>
 </html>
