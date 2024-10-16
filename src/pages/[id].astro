@@ -15,7 +15,7 @@ const isAstro = id === "astro";
 const codeExample = `---
 const { param } = Astro.params;
 ---
-<h1>[param] er {param}</h1>; // "[param] er ${id}"
+<h1>param er {param}</h1>; // "param er ${id}"
 `;
 
 const paramExample = `├── src/
@@ -33,7 +33,7 @@ const paramExample = `├── src/
     <title>Astro</title>
   </head>
   <body class:list={[{ astro: isAstro }]}>
-    <h1>[param] er <span>{id}</span></h1>
+    <h1>param er <span>{id}</span></h1>
     <div>
       <figure>
         <Code code={paramExample} theme="houston" />
