@@ -11,6 +11,35 @@
     <title>Astro</title>
   </head>
   <body>
-    <h1>index.astro</h1>
+    <h1>Forside</h1>
+    <div class="path">
+      <p>current page: <span>index.astro</span></p>
+    </div>
   </body>
 </html>
+
+<style>
+  h1 {
+    font-family: system-ui;
+    font-size: 1.5rem;
+  }
+  .path {
+    position: fixed;
+    top: 0;
+    right: 1rem;
+    font-family: monospace;
+
+    span {
+      font-weight: 700;
+    }
+  }
+  span {
+    color: #5000ca;
+    border: 1px solid oklch(from #5000ca 75% c h);
+    background: oklch(from #5000ca 98% c h / 50%);
+    line-height: 1;
+    padding: 0.2rem;
+    display: inline-block;
+    border-radius: 0.25rem;
+  }
+</style>

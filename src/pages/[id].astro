@@ -20,7 +20,7 @@ const { param } = Astro.params;
 
 const paramExample = `├── src/
     └── pages/
-        └── [param].astro // ${id}.astro
+        └── [param].astro // /${id}/index.html
 `;
 ---
 
@@ -34,6 +34,9 @@ const paramExample = `├── src/
   </head>
   <body class:list={[{ astro: isAstro }]}>
     <h1>param er <span>{id}</span></h1>
+    <div class="path">
+      <p>current page: <span>[param].astro</span></p>
+    </div>
     <div>
       <figure>
         <Code code={paramExample} lang="apex" theme="houston" />
@@ -49,7 +52,10 @@ const paramExample = `├── src/
 </html>
 
 <style>
-  div {
+  h1 {
+    font-size: 1.5rem;
+  }
+  div:not(.path) {
     display: flex;
     gap: 1rem;
     flex-flow: wrap;
@@ -71,6 +77,17 @@ const paramExample = `├── src/
       letter-spacing: -0.2px;
     }
   }
+  .path {
+    position: fixed;
+    top: 0;
+    right: 1rem;
+    font-family: monospace;
+
+    span {
+      font-weight: 700;
+    }
+  }
+
   html {
     font-family: system-ui;
     -webkit-font-smoothing: antialiased;
