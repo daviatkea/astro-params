@@ -14,6 +14,7 @@
     <h1>Forside</h1>
     <div class="path">
       <p>current route: <span>index.astro</span></p>
+      <p>current page: <span>index.html</span></p>
     </div>
   </body>
 </html>
@@ -25,9 +26,16 @@
   }
   .path {
     position: fixed;
-    top: 0;
+    top: 1rem;
     right: 1rem;
     font-family: monospace;
+    display: grid;
+    gap: 0.5rem;
+    justify-items: end;
+
+    > * {
+      margin: 0;
+    }
 
     span {
       font-weight: 700;
