@@ -13,14 +13,14 @@ export const prerender = false;
 const isAstro = id === "astro";
 
 const codeExample = `---
-const { param } = Astro.params;
+const { slug } = Astro.params;
 ---
-<h1>param er {param}</h1>; // "param er ${id}"
+<h1>Slug er {slug}</h1>; // "slug er ${id}"
 `;
 
 const paramExample = `├── src/
     └── pages/
-        └── [param].astro
+        └── [slug].astro
 `;
 ---
 
@@ -33,9 +33,9 @@ const paramExample = `├── src/
     <title>Astro</title>
   </head>
   <body class:list={[{ astro: isAstro }]}>
-    <h1>param er <span>{id}</span></h1>
+    <h1>Slug er <span>{id}</span></h1>
     <div class="path">
-      <p>current route: <span>[param].astro</span></p>
+      <p>current route: <span>[slug].astro</span></p>
       <p>current page: <span>{id}/index.html</span></p>
     </div>
     <div>
@@ -45,7 +45,7 @@ const paramExample = `├── src/
       </figure>
       <figure>
         <Code code={codeExample} lang="js" theme="houston" />
-        <figcaption>Læs værdien af param</figcaption>
+        <figcaption>Læs værdien af slug</figcaption>
       </figure>
     </div>
     {id === "astro" && <p>Render markup conditionally</p>}
